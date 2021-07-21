@@ -1,0 +1,31 @@
+@page {
+    size: A4;
+    /*size: letter; !*이 키워드는 북미의 레터 용지 크기, 즉 8.5in x 11in에 해당합니다.*!*/
+}
+
+@font-face {
+    font-family: 'malgun';
+    font-weight: 400;
+    font-display: swap;
+    src: local('malgun'),
+    url('../font/malgun.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Spoqa Han Sans Regular';
+    font-weight: 400;
+    font-display: swap;
+    src: local('Spoqa Han Sans Regular'),
+    url('../font/SpoqaHanSansRegular.woff2') format('woff2'),
+    url('../font/SpoqaHanSansRegular.woff') format('woff'),
+    url('../font/SpoqaHanSansRegular.ttf') format('truetype');
+}
+
+html, body {font-family: 'malgun', 'sans-serif'; margin: 0; padding: 0; font-size: 11px; line-height: 14px}
+/*body {font-family: 'Spoqa Han Sans Regular', 'sans-serif'}*/
+table {border-collapse: collapse}
+table, th, td {border: 1px solid black}
+a img {width: 20px; height: 20px}
+table img {width: 90px; height: 90px}
+div {display: flex}
+button {height: 100px; background: transparent; border: none; cursor: pointer}

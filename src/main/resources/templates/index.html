@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>엑셀다운로드</title>
+  <bookmarks>
+    <bookmark name="비숑" href="#비숑"></bookmark>
+  </bookmarks>
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+</head>
+
+<body>
+<div>
+  <table>
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>이미지</th>
+      <th>견종</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row : ${rows}">
+      <td th:text="${row?.id}"></td>
+      <td><img th:src="${row?.imgPath}"/></td>
+      <td th:text="${row?.type}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <button type="button" onclick="download.call(this)"><img src="img/pdf_icon.png"/></button>
+
+  <script>
+    function download() {
+      this.style.visibility = 'hidden'
+
+      axios({
+        method: 'GET',
+        url: '/download',
+        responseType: 'blob'
+      }).then((response) => {
+        const fileName = response.headers['content-disposition'].split('filename=')[1].replaceAll("\"", "") // 파일명
+        const link = document.createElement('a') // a 태그 생성
+        const url = window.URL.createObjectURL(new Blob([response.data]))
+        link.href = url
+        link.setAttribute('download', fileName);
+        link.click();
+        link.remove()
+      }).catch((error) => console.log(error));
+    }
+  </script>
+</div>
+</body>
+</html>
